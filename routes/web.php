@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WeddingGalleryController;
 use App\Models\HeroSection;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,10 @@ Route::get('/products', function () {
 
 Route::get('/wedding', function () {
     $hero_section = HeroSection::where('page', 'wedding')->latest()->first();
-    return view('wedding', compact('hero_section'));
+    $wedding_galleries = App\Models\WeddingGallery::where('is_active', true)
+        ->orderBy('order')
+        ->get();
+    return view('wedding', compact('hero_section', 'wedding_galleries'));
 })->name('wedding');
 
 Route::get('/event', function () {
@@ -65,6 +69,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['guest'])->group(fun
     Route::resource('hero-sections', HeroSectionController::class);
 
     Route::resource('carousel-images', CarouselImageController::class);
+
+    Route::resource('wedding-galleries', WeddingGalleryController::class);
     
     // Pages Management
     Route::prefix('pages')->name('pages.')->group(function () {

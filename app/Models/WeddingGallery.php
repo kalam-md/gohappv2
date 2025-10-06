@@ -10,13 +10,15 @@ class WeddingGallery extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
         'image',
+        'title',
+        'location',
+        'year',
+        'order',
         'is_active'
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

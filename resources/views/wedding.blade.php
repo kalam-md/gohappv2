@@ -97,71 +97,22 @@
 
         <!-- Masonry Gallery Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
-            <!-- Gallery Item 1 -->
-            <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                     alt="Wedding Ceremony" 
-                     class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                <div class="p-4">
-                    <h3 class="font-playfair text-xl font-bold mb-1">Traditional Javanese Wedding</h3>
-                    <p class="text-gray-500 text-sm">Bandung, 2023</p>
+            @forelse($wedding_galleries as $gallery)
+                <!-- Gallery Item -->
+                <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <img src="{{ asset('storage/' . $gallery->image) }}" 
+                         alt="{{ $gallery->title }}" 
+                         class="w-full h-auto object-cover hover:scale-105 transition duration-500">
+                    <div class="p-4">
+                        <h3 class="font-playfair text-xl font-bold mb-1">{{ $gallery->title }}</h3>
+                        <p class="text-gray-500 text-sm">{{ $gallery->location }}, {{ $gallery->year }}</p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Gallery Item 2 -->
-            <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
-                     alt="Bridal Portrait" 
-                     class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                <div class="p-4">
-                    <h3 class="font-playfair text-xl font-bold mb-1">Modern Minimalist Wedding</h3>
-                    <p class="text-gray-500 text-sm">Jakarta, 2023</p>
+            @empty
+                <div class="col-span-3 text-center py-12 text-gray-500">
+                    No wedding galleries available yet.
                 </div>
-            </div>
-
-            <!-- Gallery Item 3 -->
-            <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" 
-                     alt="Wedding Couple" 
-                     class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                <div class="p-4">
-                    <h3 class="font-playfair text-xl font-bold mb-1">Beachfront Wedding</h3>
-                    <p class="text-gray-500 text-sm">Bali, 2022</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 4 -->
-            <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                     alt="Wedding Details" 
-                     class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                <div class="p-4">
-                    <h3 class="font-playfair text-xl font-bold mb-1">Vintage Theme Wedding</h3>
-                    <p class="text-gray-500 text-sm">Yogyakarta, 2022</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 5 -->
-            <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                     alt="Wedding Party" 
-                     class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                <div class="p-4">
-                    <h3 class="font-playfair text-xl font-bold mb-1">Garden Wedding Celebration</h3>
-                    <p class="text-gray-500 text-sm">Bogor, 2023</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 6 -->
-            <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                     alt="Wedding Reception" 
-                     class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                <div class="p-4">
-                    <h3 class="font-playfair text-xl font-bold mb-1">Luxury Ballroom Wedding</h3>
-                    <p class="text-gray-500 text-sm">Jakarta, 2023</p>
-                </div>
-            </div>
+            @endforelse
         </div>
 
         <div class="text-center mt-12">

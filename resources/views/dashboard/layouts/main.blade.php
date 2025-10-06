@@ -54,6 +54,11 @@
                     <i class="fas fa-panorama mr-3"></i>
                     Carousel
                 </a>
+
+                <a href="{{ route('dashboard.wedding-galleries.index') }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition">
+                    <i class="fas fa-heart mr-3"></i>
+                    Wedding Gallery
+                </a>
             </nav>
         </div>
         

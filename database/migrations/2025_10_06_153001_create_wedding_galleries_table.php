@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('wedding_galleries', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
             $table->string('image');
+            $table->string('title');
+            $table->string('location');
+            $table->string('year');
+            $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
