@@ -49,6 +49,11 @@
                     <i class="fas fa-image mr-3"></i>
                     Hero Sections
                 </a>
+                
+                <a href="{{ route('dashboard.carousel-images.index') }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition">
+                    <i class="fas fa-panorama mr-3"></i>
+                    Carousel
+                </a>
             </nav>
         </div>
         
@@ -56,30 +61,12 @@
         <div class="flex-1 flex flex-col overflow-hidden lg:ml-64">
             <!-- Top Navigation -->
             <header class="bg-white shadow-sm">
-                <div class="flex items-center justify-between px-6 py-3">
+                <div class="flex items-center justify-between px-2 py-3">
                     <div class="flex items-center">
                         <button class="lg:hidden text-gray-500 focus:outline-none" id="openSidebar">
                             <i class="fas fa-bars"></i>
                         </button>
                         <h1 class="ml-4 text-xl font-semibold text-gray-800">@yield('header')</h1>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <div class="relative">
-                            <button class="flex items-center focus:outline-none" id="userMenuButton">
-                                <span class="mr-2 text-gray-700">Admin User</span>
-                                <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=Admin+User" alt="Admin User">
-                            </button>
-                            
-                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden z-50" id="userMenu">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                                {{-- <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
-                                </form> --}}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </header>

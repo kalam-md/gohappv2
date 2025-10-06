@@ -32,44 +32,59 @@
     <!-- Auto-scrolling Carousel Gallery -->
     <div class="carousel-container max-w-6xl mx-auto mb-12">
         <div class="carousel-track">
-            <!-- Duplicate items to create infinite loop effect -->
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/3.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/4.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/5.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/3.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/4.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/5.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <!-- Duplicated items -->
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/3.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/4.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="https://source.unsplash.com/random/600x800/?wedding,3" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/3.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/4.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
-            <div class="carousel-item overflow-hidden rounded-md shadow-md">
-                <img src="/img/wedding/5.jpg" alt="Wedding Photography" class="w-full h-64 md:h-80 object-cover">
-            </div>
+            @if($carousel_images->count() > 0)
+                <!-- First loop -->
+                @foreach($carousel_images as $image)
+                    <div class="carousel-item overflow-hidden rounded-md shadow-md group relative">
+                        <img src="{{ asset('storage/' . $image->image) }}" 
+                            alt="{{ $image->caption ?? 'Carousel Image' }}" 
+                            class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        
+                        <!-- Caption -->
+                        @if($image->caption)
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <p class="text-white text-sm md:text-base font-medium">{{ $image->caption }}</p>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+                
+                <!-- Duplicate for infinite loop effect -->
+                @foreach($carousel_images as $image)
+                    <div class="carousel-item overflow-hidden rounded-md shadow-md group relative">
+                        <img src="{{ asset('storage/' . $image->image) }}" 
+                            alt="{{ $image->caption ?? 'Carousel Image' }}" 
+                            class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        
+                        <!-- Caption -->
+                        @if($image->caption)
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <p class="text-white text-sm md:text-base font-medium">{{ $image->caption }}</p>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+            @else
+                <!-- Fallback jika belum ada data -->
+                <div class="carousel-item overflow-hidden rounded-md shadow-md group relative">
+                    <img src="/img/wedding/3.jpg" alt="Default Image" class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                </div>
+                <div class="carousel-item overflow-hidden rounded-md shadow-md group relative">
+                    <img src="/img/wedding/4.jpg" alt="Default Image" class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                </div>
+                <div class="carousel-item overflow-hidden rounded-md shadow-md group relative">
+                    <img src="/img/wedding/5.jpg" alt="Default Image" class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                </div>
+            @endif
         </div>
     </div>
     

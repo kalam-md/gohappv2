@@ -169,55 +169,101 @@
         <!-- Auto-scrolling Carousel -->
         <div class="carousel-container mb-12">
             <div class="carousel-track">
-                <!-- Event Images -->
-                <div class="carousel-item overflow-hidden rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1540317580384-e5d500436cd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Corporate Conference" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <p class="text-sm text-gray-500">Corporate Conference</p>
+                @if($carousel_images->count() > 0)
+                    <!-- First loop -->
+                    @foreach($carousel_images as $image)
+                        <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                            <img src="{{ asset('storage/' . $image->image) }}" 
+                                alt="{{ $image->caption ?? 'Event Image' }}" 
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            
+                            <!-- Caption -->
+                            @if($image->caption)
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                    <p class="text-white text-sm font-medium">{{ $image->caption }}</p>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                    
+                    <!-- Duplicate for infinite loop effect -->
+                    @foreach($carousel_images as $image)
+                        <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                            <img src="{{ asset('storage/' . $image->image) }}" 
+                                alt="{{ $image->caption ?? 'Event Image' }}" 
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            
+                            <!-- Caption -->
+                            @if($image->caption)
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                    <p class="text-white text-sm font-medium">{{ $image->caption }}</p>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                @else
+                    <!-- Fallback jika belum ada data -->
+                    <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                        <img src="https://images.unsplash.com/photo-1540317580384-e5d500436cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Corporate Conference" 
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white text-sm font-medium">Corporate Conference</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item overflow-hidden rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Music Festival" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <p class="text-sm text-gray-500">Music Festival</p>
+                    <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Music Festival" 
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white text-sm font-medium">Music Festival</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item overflow-hidden rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Product Launch" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <p class="text-sm text-gray-500">Product Launch</p>
+                    <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Product Launch" 
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white text-sm font-medium">Product Launch</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item overflow-hidden rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Gala Dinner" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <p class="text-sm text-gray-500">Gala Dinner</p>
+                    <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Gala Dinner" 
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white text-sm font-medium">Gala Dinner</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item overflow-hidden rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Charity Event" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <p class="text-sm text-gray-500">Charity Event</p>
+                    <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Charity Event" 
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white text-sm font-medium">Charity Event</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item overflow-hidden rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Birthday Party" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <p class="text-sm text-gray-500">Birthday Party</p>
+                    <div class="carousel-item overflow-hidden rounded-lg shadow-md group relative">
+                        <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Birthday Party" 
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white text-sm font-medium">Birthday Party</p>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
 

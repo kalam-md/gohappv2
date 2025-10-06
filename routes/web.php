@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarouselImageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\PageController;
@@ -19,7 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $carousel_images = App\Models\CarouselImage::where('category', 'home')
+        ->where('is_active', true)
+        ->orderBy('order')
+        ->get();
+    return view('welcome', compact('carousel_images'));
 });
 
 Route::get('/about', function () {
@@ -39,7 +44,11 @@ Route::get('/wedding', function () {
 
 Route::get('/event', function () {
     $hero_section = HeroSection::where('page', 'events')->latest()->first();
-    return view('event', compact('hero_section'));
+    $carousel_images = App\Models\CarouselImage::where('category', 'event')
+        ->where('is_active', true)
+        ->orderBy('order')
+        ->get();
+    return view('event', compact('hero_section', 'carousel_images'));
 })->name('event');
 
 Route::get('/contact', function () {
@@ -54,6 +63,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['guest'])->group(fun
     
     // Hero Sections CRUD
     Route::resource('hero-sections', HeroSectionController::class);
+
+    Route::resource('carousel-images', CarouselImageController::class);
     
     // Pages Management
     Route::prefix('pages')->name('pages.')->group(function () {
