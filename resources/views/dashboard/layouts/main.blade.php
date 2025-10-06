@@ -59,6 +59,11 @@
                     <i class="fas fa-heart mr-3"></i>
                     Wedding Gallery
                 </a>
+
+                <a href="{{ route('dashboard.pages.products.index') }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition">
+                    <i class="fas fa-box mr-3"></i>
+                    Products
+                </a>
             </nav>
         </div>
         

@@ -35,7 +35,10 @@ Route::get('/about', function () {
 
 Route::get('/products', function () {
     $hero_section = HeroSection::where('page', 'products')->latest()->first();
-    return view('product', compact('hero_section'));
+    $products = App\Models\Product::where('is_active', true)
+        ->latest()
+        ->get();
+    return view('product', compact('hero_section', 'products'));
 })->name('products');
 
 Route::get('/wedding', function () {
@@ -74,14 +77,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['guest'])->group(fun
     
     // Pages Management
     Route::prefix('pages')->name('pages.')->group(function () {
-        Route::resource('products', ProductController::class)->names([
-            'index' => 'products.index',
-            'create' => 'products.create',
-            'store' => 'products.store',
-            'edit' => 'products.edit',
-            'update' => 'products.update',
-            'destroy' => 'products.destroy'
-        ]);
+        Route::resource('products', ProductController::class);
         Route::get('wedding', [PageController::class, 'wedding'])->name('wedding');
         Route::get('events', [PageController::class, 'events'])->name('events');
         Route::get('contacts', [PageController::class, 'contacts'])->name('contacts');

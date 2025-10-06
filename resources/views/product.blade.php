@@ -24,125 +24,45 @@
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Product Card 1 -->
+            @forelse($products as $product)
+            <!-- Product Card -->
             <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
                 <div class="relative overflow-hidden h-64">
-                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
-                         alt="Basic Package" 
+                    <img src="{{ asset('storage/' . $product->image) }}" 
+                         alt="{{ $product->name }}" 
                          class="w-full h-full object-cover transition duration-500 hover:scale-105">
                 </div>
                 <div class="p-6">
-                    <h3 class="font-playfair text-2xl font-bold mb-2 text-gray-800">Basic Package</h3>
-                    <div class="text-amber-600 font-bold text-xl mb-4">Rp 8.000.000</div>
+                    <h3 class="font-playfair text-2xl font-bold mb-2 text-gray-800">{{ $product->name }}</h3>
+                    <div class="text-amber-600 font-bold text-xl mb-4">{{ $product->formatted_price }}</div>
+                    
+                    @if($product->description)
+                    <p class="text-gray-600 mb-4 text-sm">{{ Str::limit($product->description, 100) }}</p>
+                    @endif
+                    
+                    @if($product->features && count($product->features) > 0)
                     <ul class="text-gray-600 mb-6 space-y-2">
+                        @foreach($product->features as $feature)
                         <li class="flex items-center">
                             <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            8 Hours Coverage
+                            {{ $feature }}
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            300+ Edited Photos
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            1 Photographer
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Online Gallery
-                        </li>
+                        @endforeach
                     </ul>
-                    <a href="https://wa.me/6287783641312?text=Saya%20tertarik%20dengan%20Basic%20Package%20Gauri%20of%20House" 
+                    @endif
+                    
+                    <a href="https://wa.me/6287783641312?text=Saya%20tertarik%20dengan%20{{ urlencode($product->name) }}%20Gauri%20of%20House" 
                        target="_blank"
                        class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-md transition duration-300 flex items-center justify-center">
                         <i class="fab fa-whatsapp mr-2"></i> Order via WhatsApp
                     </a>
                 </div>
             </div>
-
-            <!-- Product Card 2 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
-                <div class="relative overflow-hidden h-64">
-                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
-                         alt="Premium Package" 
-                         class="w-full h-full object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="p-6">
-                    <h3 class="font-playfair text-2xl font-bold mb-2 text-gray-800">Premium Package</h3>
-                    <div class="text-amber-600 font-bold text-xl mb-4">Rp 12.000.000</div>
-                    <ul class="text-gray-600 mb-6 space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Full Day Coverage
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            500+ Edited Photos
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            2 Photographers
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Engagement Session
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Premium Album
-                        </li>
-                    </ul>
-                    <a href="https://wa.me/6287783641312?text=Saya%20tertarik%20dengan%20Premium%20Package%20Gauri%20of%20House" 
-                       target="_blank"
-                       class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-md transition duration-300 flex items-center justify-center">
-                        <i class="fab fa-whatsapp mr-2"></i> Order via WhatsApp
-                    </a>
-                </div>
+            @empty
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-500 text-lg">No packages available at the moment.</p>
             </div>
-
-            <!-- Product Card 3 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
-                <div class="relative overflow-hidden h-64">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
-                         alt="Luxury Package" 
-                         class="w-full h-full object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="p-6">
-                    <h3 class="font-playfair text-2xl font-bold mb-2 text-gray-800">Luxury Package</h3>
-                    <div class="text-amber-600 font-bold text-xl mb-4">Rp 18.000.000</div>
-                    <ul class="text-gray-600 mb-6 space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Full Day + Next Day Coverage
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            800+ Edited Photos
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            2 Photographers + Videographer
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Pre-Wedding & Engagement Session
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Luxury Photo Album + Video
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
-                            Drone Coverage
-                        </li>
-                    </ul>
-                    <a href="https://wa.me/6287783641312?text=Saya%20tertarik%20dengan%20Luxury%20Package%20Gauri%20of%20House" 
-                       target="_blank"
-                       class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-md transition duration-300 flex items-center justify-center">
-                        <i class="fab fa-whatsapp mr-2"></i> Order via WhatsApp
-                    </a>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
